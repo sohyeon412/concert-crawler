@@ -1,3 +1,6 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')  # ✅ 콘솔 출력을 UTF-8로 재설정
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -6,6 +9,7 @@ import json
 import time
 from datetime import datetime
 import os
+
 
 # ✅ 아이돌 리스트
 artists = [
@@ -191,5 +195,4 @@ with open(EXCLUDED_PATH, "w", encoding="utf-8") as f:
     json.dump(excluded_concerts, f, ensure_ascii=False, indent=2)
 
 print("🎉 전체 완료!")
-input("👉 엔터를 누르면 크롬 종료")
 driver.quit()

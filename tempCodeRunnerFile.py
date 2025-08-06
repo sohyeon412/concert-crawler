@@ -74,25 +74,26 @@ def main():
     changed = False
 
     for artist, concert_list in concerts.items():
-        sorted_list = sort_concert_list(concert_list)
+       sorted_list = sort_concert_list(concert_list)
 
-        # saved_at 제거
-        cleaned_list = [
-            {k: v for k, v in item.items() if k != "saved_at"}
+      # + saved_at 제거
+    cleaned_list = [
+           {k: v for k, v in item.items() if k != "saved_at"}
             for item in sorted_list
         ]
 
-        # 변경: 정제된 리스트로 해시 계산
-        hash_val = compute_hash(cleaned_list)
+         # + 변경: 정제된 리스트로 해시 계산
+    hash_val = compute_hash(cleaned_list)
+       
+          # 해시 저장용 딕셔너리에 기록
+    new_hashes[artist] = hash_val
 
-        # 해시 저장용 딕셔너리에 기록
-        new_hashes[artist] = hash_val
 
-        if old_hashes.get(artist) != hash_val:
+    if old_hashes.get(artist) != hash_val:
             print(f"✨ {artist} 변경 감지됨 → Firebase 저장")
             db.collection("concerts").document(artist).set({"concert_list": sorted_list})
             changed = True
-        else:
+    else:
             print(f"😴 {artist} 변경 없음")
 
     if changed and has_valid_concert(concerts):

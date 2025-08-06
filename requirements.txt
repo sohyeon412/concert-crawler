@@ -3,3 +3,6 @@ requests
 selenium
 firebase-admin
 google-cloud-firestore
+pyautogui
+pyperclip
+webdriver-manager

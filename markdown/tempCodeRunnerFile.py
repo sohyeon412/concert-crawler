@@ -8,7 +8,7 @@ from datetime import datetime
 import os
 
 # 🔐 Firebase 초기화
-cred_path = os.path.join("firebase", "idol-ticket-firebase-adminsdk.json")
+cred_path = "C:/Users/user/idol-ticket-blog-generator/firebase/idol-ticket-firebase-adminsdk.json"
 if not firebase_admin._apps:
     cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred)
@@ -72,7 +72,7 @@ def generate_markdown_from_firestore():
             lines.append(f"✍️ 출처: {concert.get('source', '미확인')}")
             lines.append("")
 
-    # 스마트 스토어 링크
+    # 📣 광고 영역
     lines.append("\n---\n")
     lines.append("📸 최신 촬영 장비가 필요하다면?")
     lines.append("👉 [모빌렌트 바로가기] https://smartstore.naver.com/movilrent \n")

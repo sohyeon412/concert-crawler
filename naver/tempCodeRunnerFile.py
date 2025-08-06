@@ -6,17 +6,13 @@ import json
 import time
 import pyautogui
 import pyperclip
-import os
-
-
-#모던빌리지 #최신촬영장비 #최신촬영장비추천 #촬영장비대여 #촬영장비렌탈 #카메라추천 #카메라렌탈 #카메라대여 #카메라렌즈추천 #카메라렌즈대여 #카메라렌즈렌탈 #홈마카메라 #홈마카메라추천 #홈마카메라렌탈 #홈마카메라대여 #콘서트캠코더 #콘서트캠코더추천 #콘서트캠코더대여 #콘서트캠코더렌탈 #카메라뉴스 #카메라소식 #캐논소식 #니콘소식 #소니뉴스 #소니소식 #사진잘찍는법
 
 # ✅ 입력할 제목
 with open("markdown/concert_title.txt", "r", encoding="utf-8") as f:
     title = f.read().strip()
 
 # ✅ 본문 내용을 markdown 파일에서 읽기
-with open("markdown/concert_post.txt", "r", encoding="utf-8") as f:
+with open("markdown/concert_post.md", "r", encoding="utf-8") as f:
     body = f.read()
 
 # ✅ 해시태그 (원한다면 여기에 추가)
@@ -122,30 +118,30 @@ except Exception as e:
     print("❌ 본문 입력 실패:", e)
 
 # ✅ 2) 링크 카드 삽입
-#try:
-#    link_button = WebDriverWait(driver, 10).until(
-#        EC.element_to_be_clickable((By.CLASS_NAME, "se-oglink-toolbar-button"))
-#    )
-#    link_button.click()
-#    print("✅ 링크 버튼 클릭 완료")
-#    time.sleep(1)
-#
-#    link_input = WebDriverWait(driver, 10).until(
-#        EC.presence_of_element_located((By.CSS_SELECTOR, "input.se-popup-oglink-input"))
-#    )
-#    link_input.clear()
-#    link_input.send_keys("https://smartstore.naver.com/movilrent")
-#    link_input.send_keys('\n')
-#    print("✅ 링크 입력 및 엔터 완료")
-#   time.sleep(2.5)
-#
-#    confirm_button = WebDriverWait(driver, 10).until(
-#        EC.element_to_be_clickable((By.CSS_SELECTOR, "button.se-popup-button-confirm"))
-#    )
-#   confirm_button.click()
-#    print("✅ 링크 카드 삽입 완료")
-#except Exception as e:
-#    print("❌ 링크 카드 삽입 실패:", e)
+try:
+    link_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CLASS_NAME, "se-oglink-toolbar-button"))
+    )
+    link_button.click()
+    print("✅ 링크 버튼 클릭 완료")
+    time.sleep(1)
+
+    link_input = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "input.se-popup-oglink-input"))
+    )
+    link_input.clear()
+    link_input.send_keys("https://smartstore.naver.com/movilrent")
+    link_input.send_keys('\n')
+    print("✅ 링크 입력 및 엔터 완료")
+    time.sleep(2.5)
+
+    confirm_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "button.se-popup-button-confirm"))
+    )
+    confirm_button.click()
+    print("✅ 링크 카드 삽입 완료")
+except Exception as e:
+    print("❌ 링크 카드 삽입 실패:", e)
 
 # ✅ 3) 해시태그 입력
 try:
@@ -171,7 +167,7 @@ try:
     upload_input = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']"))
     )
-    image_path = os.path.join(os.getcwd(), "images", "thumbnail.png")
+    image_path = "C:/Users/user/thum.png"  # ← 여기서 카카오톡 받은 이미지 말고 샘플 이미지 사용
     upload_input.send_keys(image_path)
     print("✅ 이미지 업로드 완료")
     time.sleep(3)
@@ -198,7 +194,7 @@ except Exception as e:
 
 
 
-# ✅ 카테고리 선택
+# ✅ 카테고리 선택 (일기)
 try:
     category_button = WebDriverWait(driver, 5).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "button.selectbox_button__jb1Dt"))
@@ -210,12 +206,12 @@ try:
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "label.radio_label__mB6ia"))
     )
     for label in category_labels:
-        if "모빌 스토리" in label.text:
+        if "일기" in label.text:
             label.click()
-            print("✅ 카테고리 선택 완료")
+            print("✅ 카테고리 '일기' 선택 완료")
             break
     else:
-        print("⚠️ 카테고리를 찾지 못했습니다.")
+        print("⚠️ '일기' 카테고리를 찾지 못했습니다.")
 except Exception as e:
     print("❌ 카테고리 선택 실패:", e)
 

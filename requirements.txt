@@ -1,0 +1,5 @@
+streamlit
+requests
+selenium
+firebase-admin
+google-cloud-firestore
